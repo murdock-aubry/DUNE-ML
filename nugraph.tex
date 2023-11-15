@@ -18,14 +18,20 @@
 
     \item \texttt{train.py}: This is the file that is called by the \texttt{.sh} files. It contains two functions;
         \begin{enumerate}
-            \item \texttt{Configure}
+            \item \texttt{configure}: Configures the structure which will be passed into the model. For the most part, this can be ignored. 
 
-            \item \texttt{train}
+            \item \texttt{train}: 
+                \begin{enumerate}
+                    \item Begins by configuring the data set via \texttt{nugraph/data/H5DataModule}
+                    \item Calls \texttt{NuGraph2.py} (or resumes training)
+                    \item Implements log methods utilized by Slurm
+                    \item Calls \texttt{pl.Trainer}. This is the \texttt{PyTorch Lightning} module that trains the network.
+                \end{enumerate}
         \end{enumerate}
 
     \item \texttt{/nugraph}: A directory that contains the models and data tools that are called in \texttt{train.py}.
         \begin{enumerate}
-            \item \texttt{/data}: A directory which contains data used in the model.
+            \item \texttt{/data}: A directory which contains data configuration methdos used in the model.
                 \begin{enumerate}
                     \item 
                 \end{enumerate}
