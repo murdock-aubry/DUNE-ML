@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage{import}
+\usepackage{preamble}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{mathtools} 
+\usepackage{enumitem}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+
+\newtheorem{thm}{Theorem}
+
+
+\usepackage[backend=bibtex]{biblatex}
+
+
+
+% To generate pdf: 
+% 
+%       pdflatex documentation 
+% 
+% To remove compiler-generated files:
+% 
+%	    rm -f *.bib *.aux *.log *.out *.pdf *.xml
+% 
+% Please clean repository before pushing to origin!
+
+
+\begin{document}
+
+\newtitle{NuGraph Documentation}
+
+\begin{spacing}{1.0}
+
+\input{nugraph}
+
+
+% \input{new_implementation}
+
+
+\end{spacing}
+
+\end{document}

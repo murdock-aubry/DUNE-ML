@@ -1,0 +1,111 @@
+\section{\texttt{numl/NuGraph/scripts}}
+
+
+    
+\begin{itemize}
+    \item Libraries:
+        \begin{enumerate}
+            \item \texttt{torch}
+                \begin{enumerate}
+                    \item \texttt{cat}: Used to concatenate tensors along specified dimension
+                    \item \texttt{optim}: Used to minimize the loss $\mathcal{L}$ via gradient descent. Contains lots of useful functions.
+                    \item \texttt{nn}: Used to construct neural networks. \texttt{nn.Sequential} is used adundantely and contructs sequential layers.
+
+                    \item \texttt{SimpleConv}: message passing operator that performs (non-trainable) propagation.
+                \end{enumerate}
+        \end{enumerate}
+
+
+    \item \texttt{train.py}: This is the file that is called by the \texttt{.sh} files.
+        \begin{enumerate}
+            \item This really just imports useful libraries and calls \texttt{/nugraph/models/NuGraph2.py}
+        \end{enumerate}
+
+    \item \texttt{/nugraph}: A directory that contains the models and data tools that are called in \texttt{train.py}.
+        \begin{enumerate}
+            \item \texttt{/data}: A directory which contains data used in the model.
+                \begin{enumerate}
+                    \item 
+                \end{enumerate}
+            \item \texttt{/models}: A directory which contains the networks called in \texttt{train.py}. Note that all of these models utilize the PyTorch library.
+                \begin{enumerate}
+                    \item \texttt{encoder.py}: Contains a single class with two functions
+                        \begin{enumerate}
+                            \item \texttt{\_\_init\_\_}
+                            \begin{itemize}
+                                \item Inputs:
+                                    \begin{itemize}
+                                        \item $n$: number of input features. I.e. amount of information given to the network for each data sample.
+
+                                        \item $m$: number of hidden features. This is the number of classes (the number of types of particles that are being identified).
+                                    \end{itemize}
+
+                                \item A  two-layer sequential neural network with one linear layer and one non-linear layer with a $\tanh$ activation. These layers are applied sequentially;
+                                    \begin{equation}
+                                        z = \tanh\left(Wx + b\right)
+                                    \end{equation}
+                                where $x\in \R^n$, $W\in \R^{n\times m}$ and $z, b\in \R^m$. In this context, the matrix $W$ is referred to as the 'weight matrix', and the vector $b$ is refered to as the 'bias'. Both $W, b$ are learned parameters that are optimized by the algorithm. Note that $\tanh$ is applied component-wise.
+
+
+                                \item This function loops through each readout plane $[u, v, y]$ and applies the sequential NN to each.
+                            \end{itemize}
+                            
+                            \item \texttt{forward}
+                            \begin{itemize}
+                                \item
+                            \end{itemize}
+
+                        \end{enumerate}
+
+                    \item \texttt{nexus.py}. Contains two classes, each with multiple functions.
+                        \begin{enumerate}
+                            \item \texttt{NexusDown}
+                                \begin{itemize} 
+                                    \item \texttt{\_\_init\_\_}
+                                        \begin{itemize}
+                                            \item Runs two subnetworks: \texttt{edge\_net} and \texttt{node\_net}
+
+                                            \item \texttt{edge\_net}: Sequential NN consisting of a single linear layer, followed by softmax. Note softmax is a function $\sigma$:
+                                            \begin{equation}
+                                                (\sigma(x))_i = \frac{e^{x_i}}{\sum_{j=1}^n e^{x_j}}
+                                            \end{equation}
+                                            Softmax converts vector entries to relative probabilities (notice that $\sum_i (\sigma(x))_i = 1$)
+
+                                            \item \texttt{node\_net}: Applies four total layers: linear $\to \tanh \to$ linear $\to \tanh$. In total;
+                                            \begin{equation}
+                                                z = \tanh\left(W_2\left(\tanh\left(W_1x + b_1\right)\right) + b_2\right)
+                                            \end{equation}
+                                            Again, $W_i, b_i$ are learned weight and bias parameters respectively.
+                                        \end{itemize}
+
+                                    \item \texttt{forward}
+                                        \begin{itemize}
+                                            \item 
+                                        \end{itemize}
+                                \end{itemize}
+
+                            \item \texttt{NexusNet}
+                                \begin{itemize} 
+                                    \item \texttt{\_\_init\_\_}: Runs the following;
+                                        \begin{itemize}
+                                            \item \texttt{}
+                                        \end{itemize}
+                                \end{itemize}
+                        \end{enumerate}
+
+                    \item \texttt{planes.py}
+                        \begin{enumerate}
+                            \item
+                        \end{enumerate}
+
+                    \item \texttt{NuGraph2.py}: Contains a single class with multiple functions. This file contains the module that we have been training.
+                        \begin{enumerate}
+                            \item \texttt{\_\_init\_\_}
+                            \begin{itemize}
+                                \item Begins by calling \texttt{encoder.py}, \texttt{nexus.py}, \texttt{planes.py}.
+                            \end{itemize}
+                        \end{enumerate}
+
+                \end{enumerate}
+        \end{enumerate}
+\end{itemize}

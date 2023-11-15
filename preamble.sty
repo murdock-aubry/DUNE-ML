@@ -1,0 +1,87 @@
+\ProvidesPackage{preamble}
+
+
+\usepackage[a4paper, total={7.0in, 9.5in}]{geometry}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{amsthm}
+\usepackage{blindtext}
+\usepackage[cmex10]{amsmath}
+\RequirePackage{fontawesome}
+\usepackage{mathtools}
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{tikz}
+\usepackage{float}
+\interdisplaylinepenalty=2500
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{tikz,lipsum,lmodern}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{arrows}
+\usepackage{centernot}
+\usepackage{subcaption}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\LO}{\mathcal{L}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\n}{\text{null}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\tr}{\text{tr}}
+\newcommand{\Div}{\text{Div}}
+\newcommand{\curl}{\text{curl}}
+\newcommand{\grad}{\text{grad}}
+\newcommand{\vol}{\text{vol}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\dell}{\partial}
+\newcommand{\sign}{\text{sign}}
+\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\newcommand{\ext}{\text{ext}}
+\newcommand{\cl}{\text{cl}}
+\newcommand{\spn}{\text{span}}
+\newcommand{\range}{\text{range}}
+\newcommand{\p}{\perp}
+\newcommand{\inn}[1]{\langle #1 \rangle}
+\newcommand{\midarrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
+\newcommand{\dullmidarrow}{\tikz \filldraw[grey] triangle (0,0) -- +(.1,0);}
+\newcommand{\question}[1]{\pagebreak\centering \textbf{Question #1}\\[0.20cm] \flushleft}
+\newtheorem{ex}{Exercise}
+\theoremstyle{definition}
+\usepackage{tkz-euclide}
+\newtheorem{problem}{Problem}[section]
+\tikzset{
+    arrowMe/.style={
+        postaction=decorate,
+        decoration={
+            markings,
+            mark=at position .5 with {\arrow[thick]{#1}}
+        }
+    }
+}
+
+
+\renewenvironment{abstract}
+ {\small
+  \begin{center}
+  \bfseries \abstractname\vspace{-1.5em}\vspace{0pt}
+  \end{center}
+  \list{}{
+    \setlength{\leftmargin}{1.5cm}%
+    \setlength{\rightmargin}{\leftmargin}%
+  }%
+  \item\relax}
+ {\endlist}
+
+
+\pgfarrowsdeclaredouble{<<s}{>>s}{stealth}{stealth}% 
+
+\newcommand{\newtitle}[1]{\pagestyle{fancy} \fancyhf{} \rhead{Page \thepage} \chead{\large{\textsc{ #1 }}}\lhead{}\flushleft}
+
