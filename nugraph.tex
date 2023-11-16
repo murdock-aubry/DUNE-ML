@@ -1,7 +1,5 @@
 \section{\texttt{numl/NuGraph/scripts}}
 
-
-    
 \begin{itemize}
     \item Libraries:
         \begin{enumerate}
@@ -12,9 +10,31 @@
                     \item \texttt{nn}: Used to construct neural networks. \texttt{nn.Sequential} is used adundantely and contructs sequential layers.
 
                     \item \texttt{SimpleConv}: message passing operator that performs (non-trainable) propagation.
+                    
+                    \item \texttt{torchmetrics.functional}: Torchmetrics is a library for metric computations; highly compatible with PyTorch. Functions contains specific class of functions.
                 \end{enumerate}
         \end{enumerate}
+        
+    \item Loss function $\mathcal{L}(\theta)$. Path: \texttt{NuGraph/util}. Both of these are imported into \texttt{decoders.py}.
+    \begin{enumerate}
+        \item \texttt{RecallLoss.py}
+            \begin{enumerate}
+                \item This is a function of the parameters $\theta$ of the model. This funtion is minimized by varying $\theta$.
+                
+                \item Sets $\texttt{weight} = 1 - recall(\hat{x}_i, y_i)$ where $\hat{x}_i$ is the model output and $y_i$ is the respective label
+                
+                \item Cross-entropy loss! Computes
+                \begin{equation}
+                    \begin{aligned}
+                        CE(p,  \hat{p}) &= -\sum_ip_i\log(\hat{p}_i) \ \ \ p_i \text{ one-hot labels}, \hat{p}_i \text{ model pred,}\\
+                        \mathcal{L}(\theta) &= \text{Avg}_i CE(y_i, \sigma(f(x_i, \theta)))
+                    \end{aligned}
+                \end{equation}
+                wehre $\sigma$ is the non-linear activation function, and $f(x_i, \theta)$ is the models guess based on the input $x_i$ and the current parameters $\theta$. 
+            \end{enumerate}
 
+        \item \texttt{LogCoshLoss.py}
+    \end{enumerate}
 
     \item \texttt{train.py}: This is the file that is called by the \texttt{.sh} files. It contains two functions;
         \begin{enumerate}
@@ -24,7 +44,7 @@
                 \begin{enumerate}
                     \item Begins by configuring the data set via \texttt{nugraph/data/H5DataModule}
                     \item Calls \texttt{NuGraph2.py} (or resumes training)
-                    \item Implements log methods utilized by Slurm
+                    \item Writes log for Slurm
                     \item Calls \texttt{pl.Trainer}. This is the \texttt{PyTorch Lightning} module that trains the network.
                 \end{enumerate}
         \end{enumerate}
@@ -33,7 +53,7 @@
         \begin{enumerate}
             \item \texttt{/data}: A directory which contains data configuration methdos used in the model.
                 \begin{enumerate}
-                    \item 
+                    \item I havent done through this yet
                 \end{enumerate}
             \item \texttt{/models}: A directory which contains the networks called in \texttt{train.py}. Note that all of these models utilize the PyTorch library.
                 \begin{enumerate}
@@ -60,10 +80,41 @@
                             
                             \item \texttt{forward}
                             \begin{itemize}
-                                \item
+                                \item 
                             \end{itemize}
 
                         \end{enumerate}
+
+                    \item \texttt{decoder.py}: Contains a multiple classes
+                        \begin{enumerate}
+                            \item \texttt{DecoderBase}
+                                \begin{itemize}
+                                    \item This initializes all of the other decoders
+                                    \item \texttt{loss}: Function
+                                        \begin{itemize}
+                                            \item returns loss (number) and metrics (some sort of data allocation)
+                                            \item Computes the following:
+                                            \begin{equation}
+                                                \begin{aligned}
+                                                    \underbrace{w = W\exp(-T)}_{T \text{ learned}} && \mathcal{L} = wf(x, y) + T
+                                                \end{aligned}
+                                            \end{equation}
+                                            where $f(x, y)$ is an input parameter to the class.
+
+                                        \end{itemize}
+                                \end{itemize}
+
+                            \item \texttt{SemanticDecoder}: Uses \texttt{RecallLoss}
+
+                            \item \texttt{FilterDecoder}: Uses 
+
+                            \item \texttt{InstanceDecoder} (this is in the github, not on compute Canada)
+
+                            \item \texttt{EventDecoder}: Uses \texttt{RecallLoss}
+
+                            \item \texttt{VertexDecoder}: Uses \texttt{LogCoshLoss}
+                        \end{enumerate}
+        
 
                     \item \texttt{nexus.py}. Contains two classes, each with multiple functions.
                         \begin{enumerate}
@@ -111,7 +162,23 @@
                             \item \texttt{\_\_init\_\_}
                             \begin{itemize}
                                 \item Begins by calling \texttt{encoder.py}, \texttt{nexus.py}, \texttt{planes.py}.
+
+                                \item Chooses decoder types from \texttt{decoders} based on the boolean input parameters to the model. Appends each type to a total list.
                             \end{itemize}
+
+                            
+
+
+                            \item \texttt{training\_step}
+                                \begin{itemize}
+                                    \item For each decoder in the list, compute respective \texttt{decoder.loss} and sets total loss to be the sum from each decoder.
+                                    \item Log stuff
+                                \end{itemize}
+
+                            \item \texttt{validation\_step}
+
+                            \item \texttt{test\_step}
+
                         \end{enumerate}
 
                 \end{enumerate}

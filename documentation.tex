@@ -1,12 +1,6 @@
 \documentclass{article}
 \usepackage{import}
 \usepackage{preamble}
-\usepackage{amsthm}
-\usepackage{array}
-\usepackage{mathtools} 
-\usepackage{enumitem}
-\usepackage{wrapfig}
-\usepackage{graphicx}
 
 \newtheorem{thm}{Theorem}
 
@@ -26,13 +20,30 @@
 % Please clean repository before pushing to origin!
 
 
+% Things to focus on:
+% 
+%   1. Understand the type of data being fed to the model. This will help when modifying the existing framework to be compatible with our data
+% 
+%   2. Understanding train.py and NuGraph2.py.
+%       NuGraph2.py is the model. It contains unknown parameters that are to be trained
+%       train.py trains this model by minimizing the loss (i.e. choosing the best parameters)
+%       
+
+
 \begin{document}
 
 \newtitle{NuGraph Documentation}
 
 \begin{spacing}{1.0}
 
+Old \href{https://github.com/exatrkx/NuGraph/tree/main}{\color{blue} github}. Contains some documentation on local installation and training. There are some Jupyter notebooks in here which contain some documentation.\\[0.20cm]
+
+Section 1 contains further documentation regarding the pre-existing model.
+
+
 \input{nugraph}
+
+
 
 
 % \input{new_implementation}
