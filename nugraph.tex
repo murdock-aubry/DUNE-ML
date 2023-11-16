@@ -1,5 +1,7 @@
 \section{\texttt{numl/NuGraph/scripts}}
 
+Main components to look at: \texttt{train.py} and \texttt{NuGraph2.py}.
+
 \begin{itemize}
     \item Libraries:
         \begin{enumerate}
@@ -45,7 +47,7 @@
                     \item Begins by configuring the data set via \texttt{nugraph/data/H5DataModule}
                     \item Calls \texttt{NuGraph2.py} (or resumes training)
                     \item Writes log for Slurm
-                    \item Calls \texttt{pl.Trainer}. This is the \texttt{PyTorch Lightning} module that trains the network.
+                    \item Calls \texttt{pl.Trainer}. This is the \texttt{PyTorch Lightning} module that trains the network. This module works with all of them methods contained in the \texttt{NuGraph.py} model. See documentation for LightningModule \href{https://lightning.ai/docs/pytorch/stable/common/lightning_module.html}{\color{blue} here}.
                 \end{enumerate}
         \end{enumerate}
 
@@ -157,28 +159,38 @@
                             \item
                         \end{enumerate}
 
-                    \item \texttt{NuGraph2.py}: Contains a single class with multiple functions. This file contains the module that we have been training.
+                    \item \texttt{NuGraph2.py}: Contains a single class with multiple functions. This file contains the module that we have been training. This file has been organized in accordance with the prototypical LightningModule framework. Take a look at this \href{https://lightning.ai/docs/pytorch/stable/common/lightning_module.html}{\color{blue} documentation} and compare with the structure of \texttt{NuGraph2.py}
                         \begin{enumerate}
-                            \item \texttt{\_\_init\_\_}
+                            \item Main components; there is one initialization followed by 6 main components.
                             \begin{itemize}
-                                \item Begins by calling \texttt{encoder.py}, \texttt{nexus.py}, \texttt{planes.py}.
-
-                                \item Chooses decoder types from \texttt{decoders} based on the boolean input parameters to the model. Appends each type to a total list.
-                            \end{itemize}
-
-                            
-
-
-                            \item \texttt{training\_step}
+                                \item \texttt{\_\_init\_\_}
                                 \begin{itemize}
-                                    \item For each decoder in the list, compute respective \texttt{decoder.loss} and sets total loss to be the sum from each decoder.
-                                    \item Log stuff
+                                    \item Begins by calling \texttt{encoder.py}, \texttt{nexus.py}, \texttt{planes.py}.
+
+                                    \item Chooses decoder types from \texttt{decoders} based on the boolean input parameters to the model. Appends each type to a total list.
                                 \end{itemize}
 
-                            \item \texttt{validation\_step}
+                                \item \texttt{forward}
 
-                            \item \texttt{test\_step}
+                                \item \texttt{training\_step}
+                                    \begin{itemize}
+                                        \item For each decoder in the list, compute respective \texttt{decoder.loss} and sets total loss to be the sum from each decoder.
+                                        \item Log stuff
+                                    \end{itemize}
 
+                                \item \texttt{validation\_step}
+
+                                \item \texttt{test\_step}
+
+                                \item \texttt{predict\_step}
+
+                                \item \texttt{configure\_optimizers}
+                            \end{itemize}
+
+                            \item Secondary components:
+                            \begin{itemize}
+                                \item \texttt{step}: I am not really sure what this does yet. It is not a method of LightningModule as far as I know.
+                            \end{itemize}
                         \end{enumerate}
 
                 \end{enumerate}
