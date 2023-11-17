@@ -40,7 +40,14 @@ Main components to look at: \texttt{train.py} and \texttt{NuGraph2.py}.
 
     \item \texttt{train.py}: This is the file that is called by the \texttt{.sh} files. It contains two functions;
         \begin{enumerate}
-            \item \texttt{configure}: Configures the structure which will be passed into the model. For the most part, this can be ignored. 
+            \item \texttt{configure}: This will likely stay roughly similar in our treatment
+                \begin{enumerate}
+                    \item Defines an argument \'parser\' which is used to process (some of) the information that we provide in the command line (log name/directory).
+
+                    \item The line \texttt{parser = Data.add\_data\_args(parser)} calls the function \texttt{add\_data\_args} from the module \texttt{Data}. This function interprets the information we give about the data set in the \texttt{.sh} files (i.e. file name/path, batch size, etc.).
+
+                    \item Similar lines to that above are called to initialize the model using the passed parameters (i.e. hidden layers, epochs, learning rate)
+                \end{enumerate}
 
             \item \texttt{train}: 
                 \begin{enumerate}
@@ -55,7 +62,10 @@ Main components to look at: \texttt{train.py} and \texttt{NuGraph2.py}.
         \begin{enumerate}
             \item \texttt{/data}: A directory which contains data configuration methdos used in the model.
                 \begin{enumerate}
-                    \item I havent done through this yet
+                    \item \texttt{H5DataModule.py}
+                        \begin{enumerate}
+                            \item \texttt{\_\_init\_\_}: Grabs all relevant pieces of information from the \texttt{.hdf5} file passed to the model
+                        \end{enumerate}
                 \end{enumerate}
             \item \texttt{/models}: A directory which contains the networks called in \texttt{train.py}. Note that all of these models utilize the PyTorch library.
                 \begin{enumerate}
