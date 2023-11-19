@@ -17,8 +17,12 @@ Main components to look at: \texttt{train.py} and \texttt{NuGraph2.py}.
                 \end{enumerate}
         \end{enumerate}
         
-    \item Loss function $\mathcal{L}(\theta)$. Path: \texttt{NuGraph/util}. Both of these are imported into \texttt{decoders.py}.
+    \item \texttt{util.}
     \begin{enumerate}
+        \item \texttt{PositionFeatures.py}
+
+        \item \texttt{FeatureNorm.py}
+
         \item \texttt{RecallLoss.py}
             \begin{enumerate}
                 \item This is a function of the parameters $\theta$ of the model. This funtion is minimized by varying $\theta$.
@@ -64,7 +68,9 @@ Main components to look at: \texttt{train.py} and \texttt{NuGraph2.py}.
                 \begin{enumerate}
                     \item \texttt{H5DataModule.py}
                         \begin{enumerate}
-                            \item \texttt{\_\_init\_\_}: Grabs all relevant pieces of information from the \texttt{.hdf5} file passed to the model
+                            \item \texttt{\_\_init\_\_}: Grabs all relevant pieces of information from the \texttt{.hdf5} file passed to the model.
+                            \item Grabs: data path, batch size, planes (I think just the three LArTPC planes?), semantic classes (labels), event classes (not sure about difference between semantic classes), sample splits (train vs test data)
+                            \item Calls \texttt{torch\_geometric.transforms.Compose} of \texttt{PositionFeatures.py} and \texttt{FeatureNorm.py}
                         \end{enumerate}
                 \end{enumerate}
             \item \texttt{/models}: A directory which contains the networks called in \texttt{train.py}. Note that all of these models utilize the PyTorch library.
