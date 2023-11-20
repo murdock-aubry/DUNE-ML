@@ -69,11 +69,11 @@
 		Github: \href{https://github.com/exatrkx/NuGraph/tree/main}{\color{blue} NuGraph}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Three Flavour Paradigm}
-	% I think it is important that we provide sufficient motivation for designing this model
-	% Here we should describe the three flavour paradigm, motivations for classifying particle flavour
-\end{frame}
+% \begin{frame}
+% 	\frametitle{Three Flavour Paradigm}
+% 	% I think it is important that we provide sufficient motivation for designing this model
+% 	% Here we should describe the three flavour paradigm, motivations for classifying particle flavour
+% \end{frame}
 
 
 \begin{frame}
@@ -83,7 +83,7 @@
 	% Why is the information collected from the LArTPC sufficient for classification purposes?
 	\begin{figure}[h!]
 		\includegraphics[width=.7\textwidth]{images/LArTPC.png}
-		\caption{Sample image, feel free to remove/replace. Source: \href{https://arxiv.org/abs/2002.02967}{\color{blue} Introduction to DUNE. Vol 1}}
+		\caption{Source: \href{https://arxiv.org/abs/2002.02967}{\color{blue} Introduction to DUNE. Vol 1}}
 		\label{far_detector}
 	\end{figure}
 \end{frame}
@@ -92,39 +92,87 @@
 \begin{frame}
 	% This is where we discuss the specifics of NuGraph2.py. Need to go in detail about the way that the __init__ function operates (i.e. the encode, planenet, and nexusnet files followed by the decoder selection phase)
 	\frametitle{Algorithm Structure}
-		The entire algorithm depends largely on three main components
-		\begin{enumerate} 
-			\item \texttt{train.py}
-				\begin{itemize}
-					\item This Python file takes as input the model parameters and the \texttt{hdf5} data file to be trained. 
-					\item Utilizes PyTorch library
-					\item Configures the model based on the input parameters (i.e. batch size, epoch, input/hidden features, etc...)
-					\item trains the model using the provided data set.
-					\item Calls PyTorch lightning Trainer module to train the model.
-					\item It calls the following two files;
-				\end{itemize}
+		% The entire algorithm depends largely on three main components
+		% \begin{enumerate} 
+		% 	\item \texttt{train.py}
+		% 		\begin{itemize}
+		% 			\item This Python file takes as input the model parameters and the \texttt{hdf5} data file to be trained. 
+		% 			\item Utilizes PyTorch library
+		% 			\item Configures the model based on the input parameters (i.e. batch size, epoch, input/hidden features, etc...)
+		% 			\item trains the model using the provided data set.
+		% 			\item Calls PyTorch lightning Trainer module to train the model.
+		% 			\item It calls the following two files;
+		% 		\end{itemize}
 
-			\item \texttt{NuGraph.py}
-				\begin{itemize}
-					\item This file contains all of the network's architecture.
-					\item Contains the key functions \texttt{\_\_init\_\_()}\texttt{forward()}, \texttt{training\_step()}, \texttt{validation\_step()}, etc. which are passed to PyTorch LightningModule and utilized by the training module.
-				\end{itemize}
+		% 	\item \texttt{NuGraph.py}
+		% 		\begin{itemize}
+		% 			\item This file contains all of the network's architecture.
+		% 			\item Contains the key functions \texttt{\_\_init\_\_()}\texttt{forward()}, \texttt{training\_step()}, \texttt{validation\_step()}, etc. which are passed to PyTorch LightningModule and utilized by the training module.
+		% 		\end{itemize}
 
-			\item \texttt{H5DataModule.py}
-		\end{enumerate}
+		% 	\item \texttt{H5DataModule.py}
+		% \end{enumerate}
+		\begin{figure}[h!]
+			\includegraphics[width=1\textwidth]{images/model1.png}
+			\caption{Description of NuGraph Neural Network. See \href{https://lightning.ai/docs/pytorch/stable/common/lightning_module.html}{\color{blue} LighningModule}} for further documentation.
+			\label{model1}
+		\end{figure}
 \end{frame}
 
 
 \begin{frame}
 	% This is where we discuss the specifics of NuGraph2.py. Need to go in detail about the way that the __init__ function operates (i.e. the encode, planenet, and nexusnet files followed by the decoder selection phase)
-	\frametitle{NuGraph Architecture}
-		The NuGraph neural network architecture consists of three major components
-		\begin{enumerate} 
-			\item 
-
-			\item 
-		\end{enumerate}
+	\frametitle{\texttt{NuGraph2.py} Structure}
+		\begin{figure}[h!]
+			\includegraphics[width=1\textwidth]{images/model2.png}
+			\caption{See \href{https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html}{\color{blue} AdamW}}, \href{https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.OneCycleLR.html}{\color{blue} \texttt{OneCycleLR}}.
+			\label{model2}
+		\end{figure}
 \end{frame}
+
+
+\begin{frame}
+	% This is where we discuss the specifics of NuGraph2.py. Need to go in detail about the way that the __init__ function operates (i.e. the encode, planenet, and nexusnet files followed by the decoder selection phase)
+	\frametitle{\texttt{Layer Description}}
+		\begin{figure}[h!]
+			\includegraphics[width=1\textwidth]{images/model3.png}
+			% \caption{See \href{https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html}{\color{blue} AdamW}}, \href{https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.OneCycleLR.html}{\color{blue} \texttt{OneCycleLR}}.
+			\label{model3}
+		\end{figure}
+\end{frame}
+
+\begin{frame}
+	% This is where we discuss the specifics of NuGraph2.py. Need to go in detail about the way that the __init__ function operates (i.e. the encode, planenet, and nexusnet files followed by the decoder selection phase)
+	\frametitle{\texttt{Decoder Descriptions}}
+		\begin{figure}[h!]
+			\includegraphics[width=1\textwidth]{images/decoders.png}
+			% \caption{See \href{https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html}{\color{blue} AdamW}}, \href{https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.OneCycleLR.html}{\color{blue} \texttt{OneCycleLR}}.
+			\label{decoders}
+		\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	% This is where we discuss the specifics of NuGraph2.py. Need to go in detail about the way that the __init__ function operates (i.e. the encode, planenet, and nexusnet files followed by the decoder selection phase)
+	\frametitle{\texttt{Loss Functions}}
+		\begin{figure}[h!]
+			\includegraphics[width=1\textwidth]{images/loss.png}
+			% \caption{See \href{https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html}{\color{blue} AdamW}}, \href{https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.OneCycleLR.html}{\color{blue} \texttt{OneCycleLR}}.
+			\label{loss}
+		\end{figure}
+\end{frame}
+
+
+% \begin{frame}
+% 	% This is where we discuss the specifics of NuGraph2.py. Need to go in detail about the way that the __init__ function operates (i.e. the encode, planenet, and nexusnet files followed by the decoder selection phase)
+% 	\frametitle{NuGraph Architecture}
+% 		The NuGraph neural network architecture consists of three major components
+% 		\begin{enumerate} 
+% 			\item 
+
+% 			\item 
+% 		\end{enumerate}
+% \end{frame}
 
 
 
@@ -132,7 +180,9 @@
 
 \begin{frame}
 \frametitle{Sample frame title}
-	stuff here
+	\begin{itemize}
+		\item We need access to the data that we will be using for classification
+	\end{itemize}
 \end{frame}
 
 
@@ -140,8 +190,14 @@
 \section{Model Implementation}
 
 \begin{frame}
-\frametitle{Title}
-	Stuff here
+\frametitle{Model Adjustements}
+	\begin{itemize}
+		\item Alter model to be able to handle this new class of data
+
+		\item Reconfigure \texttt{H5DataModule.py}
+		\item Choose ideal architecture (i.e. mimic \texttt{NexusNet, PlaneNet, etc...})
+		\item Choose ideal loss function (i.e CE? LogCosh?)
+	\end{itemize}
 \end{frame}
 
 
