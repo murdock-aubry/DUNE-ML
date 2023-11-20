@@ -81,12 +81,66 @@
 	% Discuss specific data collection methods 
 	% both SP and DP, but mainly focus on the overall ideology and methods for doing so
 	% Why is the information collected from the LArTPC sufficient for classification purposes?
+	\begin{itemize}
+		\item
+	\end{itemize}
 	\begin{figure}[h!]
 		\includegraphics[width=.7\textwidth]{images/LArTPC.png}
 		\caption{Source: \href{https://arxiv.org/abs/2002.02967}{\color{blue} Introduction to DUNE. Vol 1}}
 		\label{far_detector}
 	\end{figure}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Data Collection: Time Projection Chamber}
+	\begin{figure}[h!]
+		\includegraphics[width=.8\textwidth]{images/data1.png}
+		\caption{Example of pedestal-subtracted data for one ProtoDUNE-SP wire plane. Source: \href{https://arxiv.org/abs/2002.02967}{\color{blue} Introduction to DUNE. Vol 1}}
+		\label{far_detector}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Data Collection: Time Projection Chamber}
+	\begin{figure}[h!]
+		\includegraphics[width=.8\textwidth]{images/data2.png}
+		\caption{Calibrated, deconvoluted pedestal-subtracted data for one ProtoDUNE-SP wire plane. Source: \href{https://arxiv.org/abs/2002.02967}{\color{blue} Introduction to DUNE. Vol 1}}
+		\label{far_detector}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Data Collection: Data Volumes}
+	\begin{itemize}
+		\item Single Phase:
+		\begin{itemize}
+			\item Each of the 150 SP anode plane assemblies has 2,560 readout channels
+			\item Each is sampled with 12 bit precision every 500 ns
+			\item Drift times approximately 2.5 ms, 6 GB per 5.4 ms readout window
+		\end{itemize}
+
+		\item Dual Phase:
+		\begin{itemize}
+			\item 153,600 readout channels and a full drift time of 7.5 ms
+			\item Compressed size of a single ROI at 22 MB
+			\item Gas amplification leads to a high S/N ratio (see previous slides)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Data Collection: ProtoDUNE}
+	We have been training the model on ProtoDUNE samples.
+	\begin{itemize}
+		\item Consists of 6,000-15,000 12-bit, 0.5 $\mu$sec samples.
+		\item Each 3 ms of APA readout consists of more than 15 M 16-bit values
+		\item Data with a 7.5 ms window were also recorded.
+	\end{itemize}
+	Very computationally expensive.
+\end{frame}
+
+
 
 
 \begin{frame}
@@ -114,7 +168,7 @@
 		% \end{enumerate}
 		\begin{figure}[h!]
 			\includegraphics[width=1\textwidth]{images/model1.png}
-			\caption{Description of NuGraph Neural Network. See \href{https://lightning.ai/docs/pytorch/stable/common/lightning_module.html}{\color{blue} LighningModule}} for further documentation.
+			\caption{Description of NuGraph Neural Network. See \href{https://lightning.ai/docs/pytorch/stable/common/lightning\_module.html}{\color{blue} LighningModule}} for further documentation.
 			\label{model1}
 		\end{figure}
 \end{frame}
