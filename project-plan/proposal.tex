@@ -238,11 +238,29 @@
 \section{Binary Classification of Decay Events}
 
 \begin{frame}
-\frametitle{Sample frame title}
+\frametitle{Building Training Data}
 	\begin{itemize}
-		\item We need access to the data that we will be using for classification
+		\item New training data to be classified as follows:
+			\begin{itemize}
+				\item Event follows the decay mode we are interested in
+				\item Event does not follow the decay mode we are interested in
+			\end{itemize}
+		\item It will be a binary classification
+		\item Ultimately, the new model will determine if the decay mode has been followed (or not) for a given class of events
 	\end{itemize}
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Pion Decay Modes}
+	\begin{itemize}
+		\item Focus will be on looking for decays modes involving $\tau$, $\nu_{\tau}$ (+ other particles), and Pions
+		\item The classification for the data will be physical characteristics (e.g energy, momentum, spin) which can be found in the existing data
+		\item Current plan is to look for decays into Pions with the correct spins
+		\item We are going to look into this more starting this week
+	\end{itemize}
+\end{frame}
+
 
 
 
