@@ -240,13 +240,16 @@
 \begin{frame}
 \frametitle{Building Training Data}
 	\begin{itemize}
-		\item New training data to be classified as follows:
+		\item New training data will need to be configured as follows:
 			\begin{itemize}
 				\item Event follows the decay mode we are interested in
 				\item Event does not follow the decay mode we are interested in
 			\end{itemize}
-		\item It will be a binary classification
-		\item Ultimately, the new model will determine if the decay mode has been followed (or not) for a given class of events
+		\item This configuration can be done by looking at the physical characteristics (e.g energy, momentum, spin) which can be found in the existing data
+		\item Create a script to classify decay events of interest from existing data
+			\begin{itemize}
+				\item Once classified, attach a label (e.g 1 $\rightarrow$ decay of interest has happened, 0 $\rightarrow$ decay of interest has not happened) and send to new training model
+			\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -255,8 +258,7 @@
 \frametitle{Pion Decay Modes}
 	\begin{itemize}
 		\item Focus will be on looking for decays modes involving $\tau$, $\nu_{\tau}$ (+ other particles), and Pions
-		\item The classification for the data will be physical characteristics (e.g energy, momentum, spin) which can be found in the existing data
-		\item Current plan is to look for decays into Pions with the correct spins
+		\item Current plan is to look for Pion decay modes with the correct spins
 		\item We are going to look into this more starting this week
 	\end{itemize}
 \end{frame}
