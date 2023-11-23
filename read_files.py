@@ -35,3 +35,9 @@ print(np.size(f['edep_table']['energy'][()]))
 x = np.linspace(0, 1, np.size(f['edep_table']['energy'][()]))
 plt.plot(x, f['edep_table']['energy'][()])
 plt.show()
+
+
+
+#Feel use the space below to open more files or play around with the existing one
+
+#f = h5py.File("File_Name")
