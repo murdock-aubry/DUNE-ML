@@ -4,7 +4,7 @@
 \usecolortheme{default}
 
 \title{\subtitle{Binary Classification Model for Decay Events}}
-\author{Prince Bhaura, Yijie Wang, Murdock Aubry}
+\author{Murdock Aubry, Prince Bhaura, Yijie Wang}
 \institute{University of Toronto}
 \date{\today}
 
@@ -193,6 +193,17 @@
 \end{frame}
 
 
+\begin{frame}
+	% This is where we discuss the specifics of NuGraph2.py. Need to go in detail about the way that the __init__ function operates (i.e. the encode, planenet, and nexusnet files followed by the decoder selection phase)
+	\frametitle{\texttt{NuGraph2.py} Structure}
+		\begin{figure}[h!]
+			\includegraphics[width=1\textwidth]{images/model2.png}
+			\caption{See \href{https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html}{\color{blue} AdamW}}, \href{https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.OneCycleLR.html}{\color{blue} \texttt{OneCycleLR}}.
+			\label{model2}
+		\end{figure}
+\end{frame}
+
+
 \section{Binary Classification of Decay Events}
 
 
@@ -224,13 +235,23 @@
 
 
 \begin{frame}
-	% This is where we discuss the specifics of NuGraph2.py. Need to go in detail about the way that the __init__ function operates (i.e. the encode, planenet, and nexusnet files followed by the decoder selection phase)
-	\frametitle{\texttt{NuGraph2.py} Structure}
-		\begin{figure}[h!]
-			\includegraphics[width=1\textwidth]{images/model2.png}
-			\caption{See \href{https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html}{\color{blue} AdamW}}, \href{https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.OneCycleLR.html}{\color{blue} \texttt{OneCycleLR}}.
-			\label{model2}
-		\end{figure}
+    \frametitle{Frame Title}
+    More stuff here if needed
+\end{frame}
+
+
+\section{Model Implementation}
+
+
+\begin{frame}
+\frametitle{Proposed Model Adjustments}
+	\begin{itemize}
+		\item Alter model to be able to handle this new class of data
+
+		\item Reconfigure \texttt{H5DataModule.py}
+		\item Choose ideal architecture (i.e. mimic \texttt{NexusNet, PlaneNet, etc...})
+		\item Choose ideal loss function (i.e CE? LogCosh?)
+	\end{itemize}
 \end{frame}
 
 
@@ -266,6 +287,12 @@
 \end{frame}
 
 
+\begin{frame}
+    \frametitle{Frame Title}
+    More stuff here if needed
+\end{frame}
+
+
 % \begin{frame}
 % 	% This is where we discuss the specifics of NuGraph2.py. Need to go in detail about the way that the __init__ function operates (i.e. the encode, planenet, and nexusnet files followed by the decoder selection phase)
 % 	\frametitle{NuGraph Architecture}
@@ -285,22 +312,6 @@
 %		\item H5DataModule.py also defines a similar data class based on the PyTorch LightningDataModule (inheritance from the LightingDataModule)
 %	\end{itemize}
 %end{frame}
-
-
-\section{Model Implementation}
-
-\begin{frame}
-\frametitle{Model Adjustments}
-	\begin{itemize}
-		\item Alter model to be able to handle this new class of data
-
-		\item Reconfigure \texttt{H5DataModule.py}
-		\item Choose ideal architecture (i.e. mimic \texttt{NexusNet, PlaneNet, etc...})
-		\item Choose ideal loss function (i.e CE? LogCosh?)
-	\end{itemize}
-\end{frame}
-
-
 
 
 \end{document}
