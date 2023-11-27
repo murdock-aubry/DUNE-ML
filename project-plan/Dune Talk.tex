@@ -27,7 +27,8 @@
 % 
 % 	3. Implementing the model
 %       a) What we can keep the same and what needs to be changed
-%       b) 
+%       b) Talk about the architectures and which one might be most ideal for us
+%       c) Talk about the loss functions and which one might be most ideal for us
 
 
 \AtBeginSection[]
@@ -51,10 +52,10 @@
 
 
 
-\section{NuGraph GNN}
+\section{Brief Introduction to NuGraph GNN}
 
 \begin{frame}
-	\frametitle{Introduction to NuGraph}
+	\frametitle{Brief Introduction to NuGraph}
 	% Simple and coherent introduction to the class of model we are working with and its primary operations
 		\begin{enumerate} 
 			\item NuGraph is a graph neural network (GNN) designed for reconstructing particle interactions in neutrino physics detector environments.
@@ -76,17 +77,18 @@
 % \end{frame}
 
 
-\begin{frame}
-	\frametitle{Data Collection: Time Projection Chamber}
+%Assuming they know this already
+%\begin{frame}
+%	\frametitle{Data Collection: Time Projection Chamber}
 	% Discuss specific data collection methods 
 	% both SP and DP, but mainly focus on the overall ideology and methods for doing so
 	% Why is the information collected from the LArTPC sufficient for classification purposes?
-	\begin{figure}[h!]
-		\includegraphics[width=.7\textwidth]{images/LArTPC.png}
-		\caption{Source: \href{https://arxiv.org/abs/2002.02967}{\color{blue} Introduction to DUNE. Vol 1}}
-		\label{far_detector}
-	\end{figure}
-\end{frame}
+%	\begin{figure}[h!]
+%		\includegraphics[width=.7\textwidth]{images/LArTPC.png}
+%		\caption{Source: \href{https://arxiv.org/abs/2002.02967}{\color{blue} Introduction to DUNE. Vol 1}}
+%		\label{far_detector}
+%	\end{figure}
+%\end{frame}
 
 \begin{frame}
 	\frametitle{Data Collection: Time Projection Chamber}
@@ -137,14 +139,15 @@
 % 	Very computationally expensive.
 % \end{frame}
 
-\begin{frame}
-	\frametitle{Data Collection: \texttt{.HDF5}}
-	Each data sample collected in the LArTPC is processed and stored into an \texttt{hdf5} file.\\[0.20cm]
 
-	To download an \texttt{hdf5} file to your local drive, run the following command:\\[0.20cm]
+%\begin{frame}
+%	\frametitle{Data Collection: \texttt{.HDF5}}
+%	Each data sample collected in the LArTPC is processed and stored into an \texttt{hdf5} file.\\[0.20cm]
 
-	\tiny{\texttt{scp [username]@computecanada.ca:projects/rpp-nilic/neutrino\_ml/MCprodW/[filename] /path/to/destination/on/local}}
-\end{frame}
+%	To download an \texttt{hdf5} file to your local drive, run the following command:\\[0.20cm]
+
+%	\tiny{\texttt{scp [username]@computecanada.ca:projects/rpp-nilic/neutrino\_ml/MCprodW/[filename] /path/to/destination/on/local}}
+%\end{frame}
 
 
 \begin{frame}
@@ -187,6 +190,36 @@
 			\caption{Description of NuGraph Neural Network. See \href{https://lightning.ai/docs/pytorch/stable/common/lightning\_module.html}{\color{blue} LighningModule}} for further documentation.
 			\label{model1}
 		\end{figure}
+\end{frame}
+
+
+\section{Binary Classification of Decay Events}
+
+
+\begin{frame}
+\frametitle{Building Training Data}
+	\begin{itemize}
+		\item New training data will need to be configured as follows:
+			\begin{itemize}
+				\item Event follows the decay mode we are interested in
+				\item Event does not follow the decay mode we are interested in
+			\end{itemize}
+		\item This configuration can be done by looking at the physical characteristics (e.g energy, momentum, spin) which can be found in the existing data
+		\item Create a script to classify decay events of interest from existing data
+			\begin{itemize}
+				\item Once classified, attach a label (e.g 1 $\rightarrow$ decay of interest has happened, 0 $\rightarrow$ decay of interest has not happened) and send to new training model
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Pion Decay Modes}
+	\begin{itemize}
+		\item Focus will be on looking for decays modes involving $\tau$, $\nu_{\tau}$ (+ other particles), and Pions
+		\item Current plan is to look for Pion decay modes with the correct spins
+		\item We are going to look into this more starting this week
+	\end{itemize}
 \end{frame}
 
 
@@ -244,45 +277,14 @@
 % 		\end{enumerate}
 % \end{frame}
 
-\begin{frame}
-	\frametitle{\texttt{H5Dataset.py \& H5DataModule.py} Description}
-	
-	\begin{itemize}
-		\item H5Dataset.py defines a class which represents neutrino decay data sets
-		\item H5DataModule.py also defines a similar data class based on the PyTorch LightningDataModule (inheritance from the LightingDataModule)
-	\end{itemize}
-\end{frame}
-
-
-\section{Binary Classification of Decay Events}
-
-\begin{frame}
-\frametitle{Building Training Data}
-	\begin{itemize}
-		\item New training data will need to be configured as follows:
-			\begin{itemize}
-				\item Event follows the decay mode we are interested in
-				\item Event does not follow the decay mode we are interested in
-			\end{itemize}
-		\item This configuration can be done by looking at the physical characteristics (e.g energy, momentum, spin) which can be found in the existing data
-		\item Create a script to classify decay events of interest from existing data
-			\begin{itemize}
-				\item Once classified, attach a label (e.g 1 $\rightarrow$ decay of interest has happened, 0 $\rightarrow$ decay of interest has not happened) and send to new training model
-			\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Pion Decay Modes}
-	\begin{itemize}
-		\item Focus will be on looking for decays modes involving $\tau$, $\nu_{\tau}$ (+ other particles), and Pions
-		\item Current plan is to look for Pion decay modes with the correct spins
-		\item We are going to look into this more starting this week
-	\end{itemize}
-\end{frame}
-
-
+%\begin{frame}
+%	\frametitle{\texttt{H5Dataset.py \& H5DataModule.py} Description}
+%	
+%	\begin{itemize}
+%		\item H5Dataset.py defines a class which represents neutrino decay data sets
+%		\item H5DataModule.py also defines a similar data class based on the PyTorch LightningDataModule (inheritance from the LightingDataModule)
+%	\end{itemize}
+%end{frame}
 
 
 \section{Model Implementation}
