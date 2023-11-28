@@ -1,0 +1,3 @@
+\beamer@sectionintoc {1}{NuGraph GNN}{3}{0}{1}
+\beamer@sectionintoc {2}{Binary Classification of Decay Events}{14}{0}{2}
+\beamer@sectionintoc {3}{Model Implementation}{17}{0}{3}
