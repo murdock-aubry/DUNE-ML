@@ -7,6 +7,11 @@
 import h5py
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+plot = False
+
+
 
 
 #Open the file
@@ -15,14 +20,91 @@ print(type(f))
 
 
 #What is stored in this file? h5py.File acts like a python dictionary, thus we can check the keys
+print("")
+
 keys = np.array(f.keys())
 
-# print(keys)
-# print(f['hit_table'].keys())
+print("File keys:", keys)
+
+
+
+####################################################################
+#                                                                  #
+#                   Energy Deposition Table                        #
+#                                                                  #
+####################################################################
+print("")
+
+
+edep_keys = f['particle_table'].keys()
+
+print("Energy deposition keys:", edep_keys)
+
+
+# # Plot initial and final positions (of energy in each plane?)
+
+# fig = plt.figure()
+# ax = fig.add_subplot(111, projection='3d')
+
+# start_pos = f['particle_table']['start_position'][()]
+# end_pos = f['particle_table']['end_position'][()]
+
+# nump = 1000 #only plot some of them, there are a lot
+
+# ax.scatter(start_pos[:nump, 0], start_pos[:nump, 1], start_pos[:nump, 2], c = 'blue')
+# ax.scatter(end_pos[:nump, 0], end_pos[:nump, 1], end_pos[:nump, 2], c = 'red')
+# if plot == True: plt.show()
+
+
+
+print(f['particle_table']['parent_id'][()])
+
+plt.plot(range(len(f['particle_table']['parent_id'][()])), f['particle_table']['parent_id'][()])
+plt.show()
+
+# plt.plot(range(len(f['particle_table']['event_id'][()])), f['particle_table']['event_id'][()])
+
+
+quit()
+
+
+
+# Event Table
+
+
+# Hit Table
+
+
+# Particle Table
+
+
+
+# Spacepoint Table
+
+
+
+
+
+print(f['particle_table']['start_process'][()])
+
+
+start_position = f['particle_table']['start_position'][()]
+end_position = f['particle_table']['end_position'][()]
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+# ax.scatter(start_position[:, 0], start_position[:, 1], start_position[:, 2])
+# plt.show()
+
+ax.scatter(end_position[:1000, 0], end_position[:1000, 1], end_position[:1000, 2])
+plt.show()
+
+
 
 hit_event = f['hit_table']['event_id'][()]
 
-print(max(abs(hit_event[:, 1])))
+
 # print(len(f['hit_table']['event_id'][()][:, 0]))
 
 
