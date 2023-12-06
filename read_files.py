@@ -17,8 +17,15 @@ print(type(f))
 #What is stored in this file? h5py.File acts like a python dictionary, thus we can check the keys
 keys = np.array(f.keys())
 
-print(keys)
-print(f['hit_table'].keys())
+# print(keys)
+# print(f['hit_table'].keys())
+
+hit_event = f['hit_table']['event_id'][()]
+
+print(max(abs(hit_event[:, 1])))
+# print(len(f['hit_table']['event_id'][()][:, 0]))
+
+
 # print(f['event_table']['nu_dir'][()])
 # print(f['event_table']['lep_energy'][()])
 quit()
